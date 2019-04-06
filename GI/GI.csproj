@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9CFA7CB1-C084-4F71-8C52-A22514743C1D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GI</RootNamespace>
+    <AssemblyName>GI</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\Microsoft.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\WEB AND API\rechargeDuniya\Bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\Profile\Client\System.Windows.Forms.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAL\CRUDOperation.cs" />
+    <Compile Include="DAL\DBHelper.cs" />
+    <Compile Include="DAL\DryrunHeatReport.cs" />
+    <Compile Include="DAL\FurnaceSwitch.cs" />
+    <Compile Include="DAL\GetConnection.cs" />
+    <Compile Include="DAL\HeatStartStopReport.cs" />
+    <Compile Include="DAL\JobEntry.cs" />
+    <Compile Include="DAL\MeterSlaveMaster.cs" />
+    <Compile Include="DAL\MyEnum.cs" />
+    <Compile Include="DAL\SpectroMaster.cs" />
+    <Compile Include="ENTITY\DryrunHeatReport.cs" />
+    <Compile Include="ENTITY\FurnaceSwitch.cs" />
+    <Compile Include="ENTITY\GI.cs" />
+    <Compile Include="ENTITY\HeatStartStop.cs" />
+    <Compile Include="ENTITY\HeatStartStopReport.cs" />
+    <Compile Include="ENTITY\JobEntry.cs" />
+    <Compile Include="ENTITY\MeterSlaveMaster.cs" />
+    <Compile Include="ENTITY\ResponseHeatReport.cs" />
+    <Compile Include="ENTITY\SearchByDate.cs" />
+    <Compile Include="ENTITY\SpectroMaster.cs" />
+    <Compile Include="frmHeatChart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHeatChart.Designer.cs">
+      <DependentUpon>frmHeatChart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLineChart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLineChart.designer.cs">
+      <DependentUpon>frmLineChart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form11.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form11.Designer.cs">
+      <DependentUpon>Form11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmComPort.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmComPort.designer.cs">
+      <DependentUpon>frmComPort.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDashboard.Designer.cs">
+      <DependentUpon>frmDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReadFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReadFile.Designer.cs">
+      <DependentUpon>frmReadFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReadFileManual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReadFileManual.designer.cs">
+      <DependentUpon>frmReadFileManual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSpectroFileRead.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSpectroFileRead.Designer.cs">
+      <DependentUpon>frmSpectroFileRead.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmViewData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewData.designer.cs">
+      <DependentUpon>frmViewData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmViewSpectroData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewSpectroData.designer.cs">
+      <DependentUpon>frmViewSpectroData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmViewJobEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewJobEntry.designer.cs">
+      <DependentUpon>frmViewJobEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmViewSpectroElements.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewSpectroElements.Designer.cs">
+      <DependentUpon>frmViewSpectroElements.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmHeatChart.resx">
+      <DependentUpon>frmHeatChart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLineChart.resx">
+      <DependentUpon>frmLineChart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form11.resx">
+      <DependentUpon>Form11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmComPort.resx">
+      <DependentUpon>frmComPort.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDashboard.resx">
+      <DependentUpon>frmDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReadFile.resx">
+      <DependentUpon>frmReadFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReadFileManual.resx">
+      <DependentUpon>frmReadFileManual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSpectroFileRead.resx">
+      <DependentUpon>frmSpectroFileRead.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewData.resx">
+      <DependentUpon>frmViewData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewSpectroData.resx">
+      <DependentUpon>frmViewSpectroData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewJobEntry.resx">
+      <DependentUpon>frmViewJobEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewSpectroElements.resx">
+      <DependentUpon>frmViewSpectroElements.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

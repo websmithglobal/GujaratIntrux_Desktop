@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewBag.Title = "Unit Consumtion Chart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<br />
+<div class="container-fluid">
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Search By Date
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        Select Date: <input id="fromdate" type="text" class="form-control" maxlength="10" placeholder="From Date" />
+                    </div>
+                    @*<div class="col-md-4">
+                            To Date: <input id="todate" type="text" class="form-control" maxlength="10" placeholder="To Date" />
+                        </div>*@
+                    <div class="col-md-4">
+                        <br />
+                        <button class="btn btn-primary" onclick="SearchByDate()">Search</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Pie Chart Code-->
+        <div class="col-md-12">
+            <div class="card mb-12">
+                <div class="card-header">
+                    <i class="fa fa-pie-chart"></i> Unit Consumtion Chart
+                </div>
+                <div class="card-body" style="width:auto;">
+                    <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        &nbsp;
+    </div>
+</div>
+
+@section scripts{
+    @*<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>*@
+    <script src="~/Scripts/canvasjs.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+            var today = dd + '/' + mm + '/' + yyyy;
+            $("#fromdate").val(today);
+        });
+
+        function SearchByDate() {
+            var chkfromdate = document.getElementById("fromdate").value
+            if (document.getElementById("fromdate").value == "") {
+                $.gritter.add({ title: 'Warning', text: 'Please enter from date..!!', sticky: false, time: '3000' });
+                $("#fromdate").focus();
+                return false;
+            }
+            if (!chkfromdate.match(/^(?:(0[1-9]|[12][0-9]|3[01])[\- \/.](0[1-9]|1[012])[\- \/.](19|20)[0-9]{2})$/)) {
+                $.gritter.add({ title: 'Warning', text: 'From date format is wrong. Format must be dd/MM/yyyy !!', sticky: false, time: '3000' });
+                $("#fromdate").focus();
+                return false;
+            }
+            chartdata();
+        }
+
+        function chartdata() {
+            var postjson = "datefrom=" + $("#fromdate").val() + "&dateto=" + $("#fromdate").val() + "&mode=UnitChart";
+            $.post("/UnitChart/getChartData", postjson, function (json) {
+                var dps = [];
+                for (var i = 0; i < json.lstChart.length; i++) {
+                    var date = new Date(parseFloat(json.lstChart[i].x.substr(6)));
+                    if (json.lstChart[i].indexLabel == '' || json.lstChart[i].markerType == '' || json.lstChart[i].markerColor == '')
+                        dps.push({ x: date, y: json.lstChart[i].y });
+                    else
+                        dps.push({ x: date, y: json.lstChart[i].y, indexLabel: json.lstChart[i].indexLabel, markerType: json.lstChart[i].markerType, markerColor: json.lstChart[i].markerColor });
+                }
+                createtestChart(dps);
+            })
+        }
+
+        function createtestChart(dps) {
+            var chart = new CanvasJS.Chart("chartContainer", {
+                theme: "light1", // "light1", "light2", "dark1", "dark2"
+                animationEnabled: true,
+                title: {
+                    text: "Live Data"
+                },
+                axisX: {
+                    valueFormatString: "HH:mm",
+                    title: "Time of Unit (24 hrs)"
+                },
+                axisY: {
+                    title: "Units (In Kwh)"
+                },
+                data: [{
+                    type: "line",
+                    xValueFormatString: "DD/MM/YYYY HH:mm:ss",
+                    toolTipContent: "<strong>Date : </strong> {x} </br> <strong>Unit : </strong> {y} Kwh </br> <strong>Switch Status : </strong> {indexLabel}",
+                    markerSize: 10,
+                    dataPoints: dps
+                }]
+            });
+
+            chart.render();
+        }
+
+        $(function () {
+            $("#fromdate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                maxDate: 0,
+                format: 'dd/mm/yyyy'
+            });
+            //$("#todate").datepicker({
+            //    changeMonth: true,
+            //    changeYear: true,
+            //    maxDate: 0,
+            //    format: 'dd/mm/yyyy'
+            //});
+        });
+
+
+    </script>
+
+}

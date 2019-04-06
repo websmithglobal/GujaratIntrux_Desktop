@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AutoStartProgram.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ReadFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">G:\TestService\Debug1\GI.exe</Value>
+    </Setting>
+    <Setting Name="ReadNotification" Type="System.String" Scope="User">
+      <Value Profile="(Default)">G:\TestService\Debug3\WEB.ConsoleApp.exe</Value>
+    </Setting>
+    <Setting Name="ReadFileExeName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">GI</Value>
+    </Setting>
+    <Setting Name="ReadComPortExeName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">GI.COMPORT</Value>
+    </Setting>
+    <Setting Name="ReadNotificationExeName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">WEB.ConsoleApp</Value>
+    </Setting>
+    <Setting Name="ReadComPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)">G:\TestService\Debug2\GI.COMPORT.exe</Value>
+    </Setting>
+    <Setting Name="tmInerval" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

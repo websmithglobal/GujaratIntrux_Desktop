@@ -1,0 +1,268 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="/Home/index">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">My Dashboard</li>
+    </ol>
+    <!-- Icon Cards For Mode-->
+    <div class="row">
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card text-white bg-success o-hidden h-100">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fa fa-fw fa-support"></i>
+                        </div>
+                        <div class="mr-5"><h4>Report-1</h4></div>
+                    </div>
+                    <a class="card-footer text-white clearfix small z-1" href="#">
+                        <span class="float-left">30000</span>
+                        <span class="float-right">
+
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card text-white bg-warning o-hidden h-100">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fa fa-fw fa-support"></i>
+                        </div>
+                        <div class="mr-5"><h4>Report-2</h4></div>
+                    </div>
+                    <a class="card-footer text-white clearfix small z-1" href="#">
+                        <span class="float-left">40000</span>
+                        <span class="float-right">
+
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card text-white bg-danger o-hidden h-100">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fa fa-fw fa-support"></i>
+                        </div>
+                        <div class="mr-5"><h4>Report-3</h4></div>
+                    </div>
+                    <a class="card-footer text-white clearfix small z-1" href="#">
+                        <span class="float-left">45000</span>
+                        <span class="float-right">
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card text-white bg-primary o-hidden h-100">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fa fa-fw fa-support"></i>
+                        </div>
+                        <div class="mr-5"><h4>Report-4</h4></div>
+                    </div>
+                    <a class="card-footer text-white clearfix small z-1" href="#">
+                        <span class="float-left">50000</span>
+                        <span class="float-right">
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    @*<div class="row">
+        <div class="col-md-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-table"></i> Machine & Date Wise Search
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            Machine: <select id="ddlMachine" class="form-control" style="width:200px;"></select>
+                        </div>
+                        <div class="col-md-3">
+                            From Date: <input id="fromdate" type="text" class="form-control" maxlength="10" placeholder="From Date" />
+                        </div>
+                        <div class="col-md-3">
+                            To Date: <input id="todate" type="text" class="form-control" maxlength="10" placeholder="To Date" />
+                        </div>
+                        <div class="col-md-3">
+                            <br />
+                            <button class="btn btn-primary" onclick="ShowSearchData()">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+    @*<div class="row">
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-table"></i> Mode Wise Hours
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Mode</th>
+                                    <th>Total Hours</th>
+                                    <th>Total Minutes</th>
+                                    <th>Total Second</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-pie-chart"></i> Mode Wise Chart
+                </div>
+                <div class="card-body">
+                    <canvas id="myPieChart" width="100%" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>*@
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //FillDropdown();
+            //LoadTable();
+            //LoadChart();
+        });
+
+        function LoadChart() {
+            $.post("/Home/GetChartData", null, function (json) {
+                $("canvas#myPieChart").empty();
+                ctx = document.getElementById("myPieChart"),
+                    myPieChart = new Chart(ctx, {
+                        type: "pie",
+                        data: json
+                    });
+            });
+        }
+
+        function LoadTable() {
+            $.post("/Home/GetTableData", null, function (json) {
+                if (json.length > 0) {
+                    var InnerHTML = '';
+                    for (var i = 0; i < json.length; i++) {
+                        InnerHTML += '<tr>';
+                        InnerHTML += '<td>' + json[i].Mode + '</td>';
+                        InnerHTML += '<td>' + json[i].TotalHours + '</td>';
+                        InnerHTML += '<td>' + json[i].TotalMinutes + '</td>';
+                        InnerHTML += '<td>' + json[i].TotalSeconds + '</td>';
+                        InnerHTML += '</tr>';
+                    }
+                    $("#dataTable1 > tbody").empty().html(InnerHTML);
+                    //$("#dataTable1").dataTable();
+                }
+                else { $("#dataTable1 > tbody").empty(); }
+            });
+        }
+
+        function ShowSearchData() {
+            var machineID = document.getElementById("ddlMachine").value
+            if (machineID == null || machineID == "") {
+                $.gritter.add({ title: 'Warning', text: 'Select valid machine name..!!', sticky: false, time: '3000' });
+                $("#ddlMachine").focus();
+                return false;
+            }
+
+            var chkfromdate = document.getElementById("fromdate").value
+            if (document.getElementById("fromdate").value == "") {
+                $.gritter.add({ title: 'Warning', text: 'Please enter from date..!!', sticky: false, time: '3000' });
+                $("#fromdate").focus();
+                return false;
+            }
+            else if (!chkfromdate.match(/^(?:(0[1-9]|[12][0-9]|3[01])[\- \/.](0[1-9]|1[012])[\- \/.](19|20)[0-9]{2})$/)) {
+                $.gritter.add({ title: 'Warning', text: 'From date format is wrong. Format must be dd/MM/yyyy !!', sticky: false, time: '3000' });
+                $("#fromdate").focus();
+                return false;
+            }
+
+            var chktodate = document.getElementById("todate").value
+            if (document.getElementById("todate").value == "") {
+                $.gritter.add({ title: 'Warning', text: 'Please enter to date..!!', sticky: false, time: '3000' });
+                $("#todate").focus();
+                return false;
+            }
+            else if (!chktodate.match(/^(?:(0[1-9]|[12][0-9]|3[01])[\- \/.](0[1-9]|1[012])[\- \/.](19|20)[0-9]{2})$/)) {
+                $.gritter.add({ title: 'Warning', text: 'To date format is wrong. Format must be dd/MM/yyyy !!', sticky: false, time: '3000' });
+                $("#todate").focus();
+                return false;
+            }
+
+            var postjson = "SN=" + $("#ddlMachine").val() + "&FromDate=" + $("#fromdate").val() + "&ToDate=" + $("#todate").val() + "";
+            $.post("/Home/GetSearchChartData", postjson, function (json) {
+                $("canvas#myPieChart").empty();
+                myPieChart.destroy();
+                ctx = document.getElementById("myPieChart"),
+                    myPieChart = new Chart(ctx, {
+                        type: "pie",
+                        data: json
+                    });
+            });
+
+            $.post("/Home/GetSearchTableData", postjson, function (jsonTable) {
+                if (jsonTable.length > 0) {
+                    var InnerHTML = '';
+                    for (var i = 0; i < jsonTable.length; i++) {
+                        InnerHTML += '<tr>';
+                        InnerHTML += '<td>' + jsonTable[i].Mode + '</td>';
+                        InnerHTML += '<td>' + jsonTable[i].TotalHours + '</td>';
+                        InnerHTML += '<td>' + jsonTable[i].TotalMinutes + '</td>';
+                        InnerHTML += '<td>' + jsonTable[i].TotalSeconds + '</td>';
+                        InnerHTML += '</tr>';
+                    }
+                    $("#dataTable1 > tbody").empty().html(InnerHTML);
+                }
+                else { $("#dataTable1 > tbody").empty(); }
+            });
+        }
+
+        function FillDropdown() {
+            $.post("/Home/GetMachineName", null, function (json) {
+                var el = $("#ddlMachine");
+                el.empty();
+                for (var i = 0; i < json.length; i++) {
+                    el.append('<option value="' + json[i].SN + '">' + json[i].NAME + '</option>')
+                }
+            });
+        }
+
+        $(function () {
+            $("#fromdate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                maxDate: 0,
+                format: 'dd/mm/yyyy'
+            });
+            $("#todate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                maxDate: 0,
+                format: 'dd/mm/yyyy'
+            });
+        });
+
+    </script>
+
+}
+
